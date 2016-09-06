@@ -1,15 +1,15 @@
-#stop/start EC2 instances based on "owner" tag
+#stop/start EC2 instances based on "Owner" tag
 
 #!/bin/bash
 
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 <owner> <stop|start>"
+    echo "Usage: $0 <Owner> <stop|start>"
     exit 1
 fi
 
 OWNER=$1
 
-#retrieve instances based on "owner" tag
+#retrieve instances based on "Owner" tag
 INSTANCES=$(aws ec2 describe-tags --filters "Name=key,Values=Owner" "Name=value,Values=$OWNER" "Name=resource-type,Values=instance" --output text | awk '{print $3}')
 
 #stop or start instances
